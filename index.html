@@ -1,647 +1,228 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal de Aulas do Professor Bruno HSM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bruno HSM | IoT & Sistemas Embarcados</title>
 
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background-color: #1e1e2f;
-      color: #00ffcc;
-      line-height: 1.6;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    /* Estilos do Login */
-    #loginForm {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #12121a;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    #loginForm h2 {
-      margin-bottom: 20px;
-      font-size: 2rem;
-    }
+body{
+  font-family: 'Inter', sans-serif;
+  background:#0f172a;
+  color:#e2e8f0;
+  scroll-behavior:smooth;
+}
 
-    .login-input {
-      margin: 10px;
-      padding: 12px;
-      width: 280px;
-      border-radius: 5px;
-      border: 2px solid #00ffcc;
-      background-color: #1e1e2f;
-      color: #00ffcc;
-      font-family: 'Orbitron', sans-serif;
-    }
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  background:#0f172ae6;
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 8%;
+  z-index:1000;
+}
 
-    .login-btn {
-      padding: 12px 25px;
-      background-color: #00ffcc;
-      color: #1e1e2f;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: bold;
-      margin-top: 10px;
-    }
+header h1{
+  font-size:1.2rem;
+  font-weight:600;
+  color:#38bdf8;
+}
 
-    .login-btn:hover {
-      background-color: #00cc99;
-    }
+nav a{
+  margin-left:25px;
+  text-decoration:none;
+  color:#e2e8f0;
+  font-weight:500;
+  transition:0.3s;
+}
 
-    .user-type {
-      display: flex;
-      gap: 20px;
-      margin: 15px 0;
-    }
+nav a:hover{
+  color:#38bdf8;
+}
 
-    .user-type label {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-    }
+section{
+  padding:120px 8% 80px 8%;
+}
 
-    #loginMessage {
-      margin-top: 15px;
-      color: #ff0066;
-      height: 20px;
-    }
+.hero{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+}
 
-    /* Estilos do conteúdo principal */
-    header {
-      background: #12121a;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 3px solid #00ffcc;
-    }
+.hero-text{
+  max-width:600px;
+}
 
-    header h1 {
-      font-size: 2.5rem;
-      color: #00ffcc;
-    }
+.hero-text h2{
+  font-size:2.5rem;
+  margin-bottom:20px;
+}
 
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      background-color: #1b1b2f;
-    }
+.hero-text p{
+  font-size:1.1rem;
+  line-height:1.6;
+  color:#cbd5e1;
+}
 
-    nav a {
-      color: #00ffcc;
-      text-decoration: none;
-      font-weight: bold;
-      border: 2px solid #00ffcc;
-      padding: 10px 15px;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
+.hero img{
+  width:260px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
 
-    nav a:hover {
-      background-color: #00ffcc;
-      color: #1e1e2f;
-    }
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:12px 25px;
+  background:#38bdf8;
+  color:#0f172a;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:600;
+  transition:0.3s;
+}
 
-    .content {
-      max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+.btn:hover{
+  background:#0ea5e9;
+}
 
-    section {
-      margin-bottom: 40px;
-    }
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+  margin-top:40px;
+}
 
-    h2 {
-      border-left: 5px solid #00ffcc;
-      padding-left: 15px;
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-    }
+.card{
+  background:#1e293b;
+  padding:25px;
+  border-radius:15px;
+  transition:0.3s;
+}
 
-    .card {
-      background-color: #2a2a40;
-      padding: 20px;
-      margin: 10px 0;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ffcc55;
-    }
+.card:hover{
+  transform:translateY(-5px);
+  background:#263449;
+}
 
-    .card h3 {
-      color: #00ccff;
-    }
+.card h3{
+  margin-bottom:15px;
+  color:#38bdf8;
+}
 
-    #projetoContent {
-      display: none;
-    }
+.card p{
+  font-size:0.95rem;
+  color:#cbd5e1;
+}
 
-    #contentArea, #adminArea {
-      display: none;
-    }
-
-    #logoutBtn {
-      margin: 20px auto;
-      display: block;
-      padding: 10px 20px;
-      background-color: #ff0066;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #logoutBtn:hover {
-      background-color: #cc0055;
-    }
-
-    /* Estilos específicos para admin */
-    .admin-features {
-      border: 2px solid #ff0066;
-      padding: 15px;
-      margin: 20px 0;
-      border-radius: 5px;
-    }
-
-    .admin-features h3 {
-      color: #ff0066;
-    }
-
-    .admin-only {
-      display: none;
-    }
-
-    .admin .admin-only {
-      display: block;
-    }
-
-    /* Melhorias para os selects */
-    select {
-      background-color: #1e1e2f;
-      color: #00ffcc;
-      border: 2px solid #00ffcc;
-      border-radius: 5px;
-      padding: 8px;
-      margin: 5px 0 15px 0;
-      width: 100%;
-      font-family: 'Orbitron', sans-serif;
-    }
-
-    label {
-      display: block;
-      margin-top: 10px;
-    }
-
-    /* Estilo para o textarea de edição */
-    .edit-textarea {
-      width: 100%;
-      min-height: 200px;
-      background-color: #1e1e2f;
-      color: #00ffcc;
-      border: 2px solid #00ffcc;
-      border-radius: 5px;
-      padding: 10px;
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 10px;
-    }
-  </style>
+footer{
+  text-align:center;
+  padding:40px;
+  background:#0f172a;
+  border-top:1px solid #1e293b;
+  color:#94a3b8;
+}
+</style>
 </head>
 
 <body>
-  <!-- Área de Login -->
-  <div id="loginForm">
-    <h2>Portal de Aulas</h2>
-    <input type="text" id="username" class="login-input" placeholder="Usuário" required>
-    <input type="password" id="password" class="login-input" placeholder="Senha" required>
-    
-    <div class="user-type">
-      <label>
-        <input type="radio" name="userType" value="admin" checked> Administrador
-      </label>
-      <label>
-        <input type="radio" name="userType" value="aluno"> Aluno
-      </label>
-    </div>
-    
-    <button class="login-btn" onclick="login()">Entrar</button>
-    <div id="loginMessage"></div>
+
+<header>
+  <h1>Bruno HSM</h1>
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#videos">Vídeos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+<section class="hero" id="sobre">
+  <div class="hero-text">
+    <h2>IoT, SoCs e Sistemas Embarcados</h2>
+    <p>
+      Desenvolvedor e Professor focado em IoT, Sistemas Embarcados e SoCs.
+      Experiência em C++ aplicado a Arduino, ESP32, Raspberry Pi Pico W e STM32,
+      desenvolvendo soluções de automação e controle inteligente de dispositivos.
+      Backend com Node.js, comunicação em tempo real via WebSockets,
+      modelagem com MongoDB e integração entre dispositivos e SoCs
+      para sistemas conectados e escaláveis.
+    </p>
+    <a href="https://github.com/seu-usuario" class="btn" target="_blank">Meu GitHub</a>
   </div>
 
-  <!-- Área do Aluno -->
-  <div id="contentArea">
-    <header>
-      <h1>Portal de Aulas do Professor Bruno</h1>
-    </header>
+  <img src="foto.jpg" alt="Foto Bruno HSM">
+</section>
 
-    <nav>
-      <a href="#clip">CLIP</a>
-      <a href="#continental">Continental</a>
-      <a href="#alfredo">Alfredo</a>
-      <a href="#happy">Happy</a>
-    </nav>
+<section id="projetos">
+  <h2>Projetos Desenvolvidos</h2>
 
-    <div class="content">
-      <section>
-        <h2>Projetos por Turma</h2>
+  <div class="projects">
 
-        <label for="instituicao">Selecione a instituição:</label>
-        <select id="instituicao" onchange="atualizarTurmas()">
-          <option value="">-- Escolha --</option>
-          <option value="CLIP">Colégio CLIP</option>
-          <option value="Continental">Colégio Continental</option>
-          <option value="Alfredo">Colégio Alfredo Castro</option>
-          <option value="Happy">Happy</option>
-        </select>
-
-        <label for="turma">Selecione a turma ou curso:</label>
-        <select id="turma" onchange="mostrarProjeto()">
-          <option value="">-- Escolha a turma --</option>
-        </select>
-
-        <div id="projetoContent" class="card">
-          <h3>Informações do Projeto</h3>
-          <div id="paragrafo-projeto"></div>
-        </div>
-      </section>
+    <div class="card">
+      <h3>ESP32</h3>
+      <p>
+        Sistemas de automação residencial com comunicação via Wi-Fi,
+        integração com WebSockets, controle remoto de dispositivos
+        e dashboards em tempo real.
+      </p>
     </div>
 
-    <button id="logoutBtn" onclick="logout()">Sair</button>
-  </div>
-
-  <!-- Área do Administrador -->
-  <div id="adminArea">
-    <header>
-      <h1>Painel Administrativo - Professor Bruno</h1>
-    </header>
-
-    <nav>
-      <a href="#gerenciar">Gerenciar Conteúdo</a>
-      <a href="#relatorios">Relatórios</a>
-      <a href="#usuarios">Usuários</a>
-      <a href="#config">Configurações</a>
-    </nav>
-
-    <div class="content">
-      <section>
-        <h2>Gerenciamento de Conteúdo</h2>
-        
-        <div class="admin-features">
-          <h3>Ferramentas Administrativas</h3>
-          <p>Bem-vindo ao painel de administração. Aqui você pode:</p>
-          <ul>
-            <li>Editar os conteúdos das turmas</li>
-            <li>Adicionar novas instituições</li>
-            <li>Gerenciar acessos de alunos</li>
-            <li>Visualizar estatísticas de acesso</li>
-          </ul>
-        </div>
-
-        <h2>Projetos por Turma</h2>
-
-        <label for="adminInstituicao">Selecione a instituição:</label>
-        <select id="adminInstituicao" onchange="adminAtualizarTurmas()">
-          <option value="">-- Escolha --</option>
-          <option value="CLIP">Colégio CLIP</option>
-          <option value="Continental">Colégio Continental</option>
-          <option value="Alfredo">Colégio Alfredo Castro</option>
-          <option value="Happy">Happy</option>
-        </select>
-
-        <label for="adminTurma">Selecione a turma ou curso:</label>
-        <select id="adminTurma" onchange="adminMostrarProjeto()">
-          <option value="">-- Escolha a turma --</option>
-        </select>
-
-        <div id="adminProjetoContent" class="card">
-          <h3>Editar Conteúdo da Turma</h3>
-          <textarea id="adminTextoProjeto" class="edit-textarea"></textarea>
-          <button onclick="salvarConteudo()" class="login-btn">Salvar Alterações</button>
-        </div>
-      </section>
+    <div class="card">
+      <h3>Raspberry Pi</h3>
+      <p>
+        Servidores locais para IoT, APIs em Node.js,
+        armazenamento em MongoDB e integração com múltiplos SoCs.
+      </p>
     </div>
 
-    <button id="logoutBtn" onclick="logout()">Sair</button>
+    <div class="card">
+      <h3>Arduino na Educação</h3>
+      <p>
+        Desenvolvimento de projetos didáticos para ensino de lógica,
+        sensores e atuadores, formando base sólida em programação C++
+        aplicada à robótica educacional.
+      </p>
+    </div>
+
   </div>
+</section>
 
-  <script>
-    // Dados de login
-    const usuarios = {
-      admin: {
-        username: "professor",
-        password: "bruno123",
-        nome: "Professor Bruno",
-        tipo: "admin"
-      },
-      aluno1: {
-        username: "aluno",
-        password: "aluno123",
-        nome: "Aluno Teste",
-        tipo: "aluno"
-      }
-    };
+<section id="videos">
+  <h2>Vídeos e Conteúdo</h2>
+  <p style="margin-top:20px;color:#cbd5e1;">
+    Acesse meus projetos, aulas e demonstrações no YouTube.
+  </p>
+  <a href="https://youtube.com/seu-canal" class="btn" target="_blank">
+    Acessar Canal
+  </a>
+</section>
 
-    // Dados das turmas corrigidos
-    const turmasPorInstituicao = {
-      'CLIP': {
-        '6° ano': `Tópico de Aulas: 
-        1° Bimestre - Uso Consciente da Inteligência Artificial (Conteudos adaptados ao 6° ano).
-        2° Bimestre - Excel e Análise de Dados (Conteudos adaptados ao 6° ano).
-        3° Bimestre - Design Digital com Canva (Conteudos adaptados ao 6° ano).
-        4° Bimestre - Programação e Automação Básica (Conteudos adaptados ao 6° ano).`,
-        
-        '7° ano': `Tópico de Aulas: 
-        1° Bimestre - Uso Consciente da Inteligência Artificial (Conteudos adaptados ao 7° ano).
-        2° Bimestre - Excel e Análise de Dados (Conteudos adaptados ao 7° ano).
-        3° Bimestre - Design Digital com Canva (Conteudos adaptados ao 7° ano).
-        4° Bimestre - Programação e Automação Básica (Conteudos adaptados ao 7° ano).`,
-        
-        '8° ano': `Tópico de Aulas: 
-        1° Bimestre - Uso Consciente da Inteligência Artificial (Conteudos adaptados ao 8° ano).
-        2° Bimestre - Excel e Análise de Dados (Conteudos adaptados ao 8° ano).
-        3° Bimestre - Design Digital com Canva (Conteudos adaptados ao 8° ano).
-        4° Bimestre - Programação e Automação Básica. (Conteudos adaptados ao 8° ano)`,
-        
-        '9° ano': `Tópico de Aulas: 
-        1° Bimestre - Uso Consciente da Inteligência Artificial (Conteudos adaptados ao 9° ano).
-        2° Bimestre - Excel e Análise de Dados (Conteudos adaptados ao 9° ano).
-        3° Bimestre - Design Digital com Canva (Conteudos adaptados ao 9° ano).
-        4° Bimestre - Programação e Automação Básica. (Conteudos adaptados ao 9° ano)`
-      },
-      'Continental': {
-        "Pré I": {
-          "1° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "4° Bimestre": "Aulas práticas de atividades lúdicas com foco em interação e manipulação do computador.",
-          "Anotações": "As aulas devem ser focadas em atividades simples e interativas, visando despertar a curiosidade digital."
-        },
-        "Pré II": {
-          "1° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "4° Bimestre": "Aulas práticas com foco na integração de tecnologias simples em atividades do dia a dia.",
-          "Anotações": "Trabalhar a exploração de aplicativos básicos e o desenvolvimento de curiosidade digital."
-        },
-        "1° ano": {
-          "1° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "4° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "Anotações": "Enfatizar a segurança online e habilidades iniciais de busca e organização de informações."
-        },
-        "2° ano": {
-          "1° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",      
-          "2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "4° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "Anotações": "Focar no desenvolvimento de habilidades básicas de produtividade e apresentação."
-        },
-        "3° ano": {
-          "1° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "4° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "Anotações": "Encorajar a resolução de problemas através da internet, uso de ferramentas como Hour of Code, desenvolvendo habilidades práticas."
-        },
-        "4° ano": {
-          "1° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "4° Bimestre": "Lógica de Programação em Blocos, uso de ferramentas como Scratch",
-          "Anotações": "Desenvolver habilidades de construção de projetos interativos e programação prática."
-        },
-        "5° ano": {
-          "1° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "4° Bimestre": "Uso consciente da Inteligência Artifical e como trabalhar lado a lado.",
-          "Anotações": "Integrar conceitos de produtividade junto com a Inteligência Artifical."
-        },
-        "6° ano": {
-          "1° ao 2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Introdução à robótica com Arduino e Projetos Práticos da Apostila.",
-          "4° Bimestre": "Desenvolvimento de projetos práticos de robótica, integrando sensores e atuadores.",
-          "Anotações": "Aprofundar o ensino de programação e robótica com foco em projetos práticos."
-        },
-        "7° ano": {
-          "1° ao 2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Início da robótica com Arduino, projetos simples de sensores e atuadores.",
-          "4° Bimestre": "Desenvolvimento de projetos de robótica e programação com C++.",
-          "Anotações": "Aprofundar as habilidades de programação e robótica com foco em resolução de problemas."
-        },
-        "8° ano": {
-          "1° ao 2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Início da robótica com Arduino, projetos simples de sensores e atuadores.",
-          "4° Bimestre": "Desenvolvimento de projetos de robótica e programação com C++.",
-          "Anotações": "Aprofundar as habilidades de programação e robótica com foco em resolução de problemas."
-        },
-        "9° ano": {
-          "1° ao 2° Bimestre": "Aplicação da apostila em sala juntamente com aula prática de computador.",
-          "3° Bimestre": "Início da robótica com Arduino, projetos simples de sensores e atuadores.",
-          "4° Bimestre": "Desenvolvimento de projetos de robótica e programação com C++.",
-          "Anotações": "Aprofundar as habilidades de programação e robótica com foco em resolução de problemas."
-        }
-      },
-      'Alfredo': {
-        '1° ano': 'Aulas com a Professora Gabriela :-) ',
-        '2° ano': 'Aulas com a Professora Gabriela :-) ',
-        '3° ano': 'Aulas com a Professora Gabriela :-) ',
-        '4° ano': 'Aulas com a Professora Gabriela :-) ',
-        '5° ano': 'Aulas com a Professora Gabriela :-) ',
-        '6° ano': '1° Bimestre: \n Edição dos dois vídeos sobre Roça e Sertão (Introdução do Canal e Vídeo falando sobre roça e sertão, separado por meninos e meninas). \n 2° Bimestre: \n A definir \n 3° Bimestre: \n A Definir \n 4° Bimestre: \n A Definir',
-        '7° ano': '1° Bimestre: \n Projeto com MicroBit de checagem da Umidade do Solo com MicroBit \n 2° Bimestre: \n A definir \n 3° Bimestre: \n A Definir \n 4° Bimestre: \n A Definir',
-        '8° ano': '1° Bimestre: \n Projeto com MicroBit de checagem da Umidade do Solo com Arduino Uno \n 2° Bimestre: \n A definir \n 3° Bimestre: \n A Definir \n 4° Bimestre: \n A Definir',
-        '9° ano': '1° Bimestre: \n Aplicativo e ChatBot sobre roça e sertão feito com Thunkable e LandBot. \n 2° Bimestre: \n A definir \n 3° Bimestre: \n A Definir \n 4° Bimestre: \n A Definir'
-      },
-      'Happy': {
-        'Desenvolvimento de Games Construct': 'Parágrafo personalizado do curso de Desenvolvimento de Games Construct.',
-        'Desenvolvimento de Games 2D Unity': 'Parágrafo personalizado do curso de Desenvolvimento de Games 2D Unity.',
-        'Desenvolvimento de Games 3D Unity': 'Desenvolvimento de Games 3D. Projeto Gladiador "Aulas do Módulo 02" onde iremos adicionar movimentos e um BOSS no game.',
-        'Desenvolvimento de Games Game Froot': 'Parágrafo personalizado do curso de Desenvolvimento de Games Game Froot.',
-        'Desenvolvimento de Games Scratch': 'Parágrafo personalizado do curso de Desenvolvimento de Games Scratch.',
-        'Desenvolvimento de Games Game Maker': 'Parágrafo personalizado do curso de Desenvolvimento de Games Game Maker.',
-        'Desenvolvimento de Games Unreal': 'Parágrafo personalizado do curso de Desenvolvimento de Games Unreal.',
-        'Influenciador Digital': 'Parágrafo personalizado do curso de Influenciador Digital.',
-        'Robótica com MicroBit': 'Parágrafo personalizado do curso de Robótica com MicroBit.',
-        'Robótica com Arduino': 'Parágrafo personalizado do curso de Robótica com Arduino.',
-        'Lógica de Programação com C#': 'Parágrafo personalizado do curso de Lógica de Programação com C#.',
-        'Lógica de Programação com C++': 'Parágrafo personalizado do curso de Lógica de Programação com C++.',
-        'Lógica de Programação com Python': 'Parágrafo personalizado do curso de Lógica de Programação com Python.'
-      }
-    };
+<section id="contato">
+  <h2>Contato</h2>
+  <p style="margin-top:20px;color:#cbd5e1;">
+    Disponível para projetos, consultoria em IoT e desenvolvimento de soluções embarcadas.
+  </p>
+</section>
 
-    // Funções de Login/Logout
-    function login() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const userType = document.querySelector('input[name="userType"]:checked').value;
-      const messageDiv = document.getElementById('loginMessage');
-      
-      messageDiv.textContent = '';
-      
-      if (!username || !password) {
-        messageDiv.textContent = 'Por favor, preencha todos os campos!';
-        return;
-      }
-      
-      let usuarioValido = null;
-      
-      for (const key in usuarios) {
-        if (usuarios[key].username === username && usuarios[key].password === password) {
-          usuarioValido = usuarios[key];
-          break;
-        }
-      }
-      
-      if (usuarioValido) {
-        if (usuarioValido.tipo !== userType) {
-          messageDiv.textContent = `Este usuário é do tipo ${usuarioValido.tipo}, mas você selecionou ${userType}.`;
-          return;
-        }
-        
-        document.getElementById('loginForm').style.display = 'none';
-        
-        if (userType === 'admin') {
-          document.getElementById('adminArea').style.display = 'block';
-          adminAtualizarTurmas();
-        } else {
-          document.getElementById('contentArea').style.display = 'block';
-        }
-      } else {
-        messageDiv.textContent = 'Usuário ou senha incorretos!';
-      }
-    }
+<footer>
+  © 2026 Bruno HSM | IoT & Sistemas Embarcados
+</footer>
 
-    function logout() {
-      document.getElementById('adminArea').style.display = 'none';
-      document.getElementById('contentArea').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'flex';
-      
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
-      document.getElementById('loginMessage').textContent = '';
-    }
-
-    // Funções para área do aluno
-    function atualizarTurmas() {
-      const instituicao = document.getElementById("instituicao").value;
-      const turmaSelect = document.getElementById("turma");
-
-      turmaSelect.innerHTML = '<option value="">-- Escolha a turma --</option>';
-
-      if (instituicao && turmasPorInstituicao[instituicao]) {
-        const turmas = Object.keys(turmasPorInstituicao[instituicao]);
-
-        turmas.forEach(turma => {
-          const option = document.createElement('option');
-          option.value = turma;
-          option.textContent = turma;
-          turmaSelect.appendChild(option);
-        });
-      }
-    }
-
-    function mostrarProjeto() {
-      const instituicao = document.getElementById("instituicao").value;
-      const turma = document.getElementById("turma").value;
-      const projetoContent = document.getElementById("projetoContent");
-      const paragrafoProjeto = document.getElementById("paragrafo-projeto");
-
-      if (instituicao && turma && turmasPorInstituicao[instituicao] && turmasPorInstituicao[instituicao][turma]) {
-        const conteudoTurma = turmasPorInstituicao[instituicao][turma];
-        
-        if (typeof conteudoTurma === 'object' && conteudoTurma !== null) {
-          let html = '';
-          for (const [key, value] of Object.entries(conteudoTurma)) {
-            html += `<p><strong>${key}:</strong> ${value}</p>`;
-          }
-          paragrafoProjeto.innerHTML = html;
-        } else {
-          // Formata quebras de linha para HTML
-          const textoFormatado = conteudoTurma.replace(/\n/g, '<br>');
-          paragrafoProjeto.innerHTML = textoFormatado;
-        }
-        
-        projetoContent.style.display = "block";
-      } else {
-        projetoContent.style.display = "none";
-      }
-    }
-
-    // Funções para área do admin
-    function adminAtualizarTurmas() {
-      const instituicao = document.getElementById("adminInstituicao").value;
-      const turmaSelect = document.getElementById("adminTurma");
-
-      turmaSelect.innerHTML = '<option value="">-- Escolha a turma --</option>';
-
-      if (instituicao && turmasPorInstituicao[instituicao]) {
-        const turmas = Object.keys(turmasPorInstituicao[instituicao]);
-
-        turmas.forEach(turma => {
-          const option = document.createElement('option');
-          option.value = turma;
-          option.textContent = turma;
-          turmaSelect.appendChild(option);
-        });
-      }
-    }
-
-    function adminMostrarProjeto() {
-      const instituicao = document.getElementById("adminInstituicao").value;
-      const turma = document.getElementById("adminTurma").value;
-      const projetoContent = document.getElementById("adminProjetoContent");
-      const textoProjeto = document.getElementById("adminTextoProjeto");
-
-      if (instituicao && turma && turmasPorInstituicao[instituicao] && turmasPorInstituicao[instituicao][turma]) {
-        const conteudoTurma = turmasPorInstituicao[instituicao][turma];
-        
-        if (typeof conteudoTurma === 'object' && conteudoTurma !== null) {
-          textoProjeto.value = JSON.stringify(conteudoTurma, null, 2);
-        } else {
-          textoProjeto.value = conteudoTurma;
-        }
-        
-        projetoContent.style.display = "block";
-      } else {
-        projetoContent.style.display = "none";
-      }
-    }
-
-    function salvarConteudo() {
-      const instituicao = document.getElementById("adminInstituicao").value;
-      const turma = document.getElementById("adminTurma").value;
-      const textoProjeto = document.getElementById("adminTextoProjeto").value;
-
-      if (instituicao && turma) {
-        try {
-          // Tenta analisar como JSON (para objetos como o Continental)
-          const parsedContent = JSON.parse(textoProjeto);
-          turmasPorInstituicao[instituicao][turma] = parsedContent;
-          alert('Conteúdo salvo com sucesso!');
-        } catch (e) {
-          // Se não for JSON válido, salva como texto simples
-          turmasPorInstituicao[instituicao][turma] = textoProjeto;
-          alert('Conteúdo salvo com sucesso!');
-        }
-      } else {
-        alert('Selecione uma instituição e turma antes de salvar!');
-      }
-    }
-  </script>
 </body>
 </html>
